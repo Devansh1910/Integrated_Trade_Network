@@ -16,10 +16,20 @@ const cargoSchema = new mongoose.Schema({
     },
     items: [
         {
+            itemId: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true
+            },
             name: String,
-            quantity: Number
+            quantity: Number,
+            price: Number,
+            totalPrice: Number
         }
     ],
+    totalPrice: {
+        type: Number,
+        required: true
+    },
     status: {
         type: String,
         enum: ['Pending', 'In Transit', 'Delivered', 'Delayed', 'Cancelled'],

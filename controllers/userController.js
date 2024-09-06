@@ -65,3 +65,18 @@ export const getUser = asyncHandler(async (req, res, next) => {
         user,
     });
 });
+
+export const deleteUser = asyncHandler(async (req, res, next) => {
+    const userId = req.user._id;
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        message: "User deleted successfully."
+    });
+});
